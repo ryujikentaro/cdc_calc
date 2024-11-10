@@ -92,35 +92,46 @@
     </div>
 
     <script>
-          const num1Input = document.getElementById("num1")
-          const num2Input = document.getElementById("num2")
-          const resultDisplay = document.getElementById("result")
+        const num1Input = document.getElementById("num1");
+        const num2Input = document.getElementById("num2");
+        const resultDisplay = document.getElementById("result");
 
-          function performOperation(Operation){
-            const num1 = parseFloat(num1Input.value)
-            const num2 = parseFloat(num2Input.value)
+        function performOperation(operation) {
+            const num1 = parseFloat(num1Input.value);
+            const num2 = parseFloat(num2Input.value);
             let result;
-            switch(Operation){
-                case "add":
-                    result = num1 + num2
-                    break
-                case "sub":
-                    result = num1 - num2
-                    break
-                case "mul":
-                    result = num1 * num2
-                    break
-                case "div":
-                    result = num1/num2
-                    break
-                default:
-                    result = "Invalid"
-                    console.log("Invalid Operation")
-                    break
 
+
+            if (isNaN(num1) || isNaN(num2)) {
+                resultDisplay.innerHTML = "<span style='color: red;'>Please enter valid numbers in both fields.</span>";
+                return;
             }
-            resultDisplay.innerHTML = "<span style='font-size:1.5rem;'>Result: " + result + "</span>";
-          }
+
+        
+            switch (operation) {
+                case "add":
+                    result = num1 + num2;
+                    break;
+                case "sub":
+                    result = num1 - num2;
+                    break;
+                case "mul":
+                    result = num1 * num2;
+                    break;
+                case "div":
+                    if (num2 === 0) {
+                        resultDisplay.innerHTML = "<span style='color: red;'>Cannot divide by zero.</span>";
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    resultDisplay.innerHTML = "<span style='color: red;'>Invalid operation.</span>";
+                    return;
+            }
+
+            resultDisplay.innerHTML = "<span style='font-size: 1.5rem;'>Result: " + result + "</span>";
+        }
     </script>
 </body>
 </html>
